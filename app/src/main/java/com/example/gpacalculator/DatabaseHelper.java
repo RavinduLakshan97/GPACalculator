@@ -1,29 +1,32 @@
 package com.example.gpacalculator;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    // Table name
     public static final String TABLE_GRADES = "grades";
+
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;  // Updated database version
 
     // Database Name
     private static final String DATABASE_NAME = "gpa_calculator.db";
-
-    // Table Names
 
     // Column names
     private static final String COLUMN_ID = "id";
     static final String COLUMN_SUBJECT = "subject";
     static final String COLUMN_GRADE = "grade";
+    static final String COLUMN_CREDITS = "credits";  // Added credits column
 
     // Table create statement
     private static final String CREATE_TABLE_GRADES = "CREATE TABLE "
             + TABLE_GRADES + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + COLUMN_SUBJECT + " TEXT," + COLUMN_GRADE + " REAL" + ")";
+            + COLUMN_SUBJECT + " TEXT," + COLUMN_GRADE + " TEXT," + COLUMN_CREDITS + " INTEGER" + ")";  // Added credits column
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,5 +45,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // create new tables
         onCreate(db);
+    }
+
+    // Method to convert letter grade to GPA value
+    public double convertGradeToGPA(String grade) {
+        switch (grade) {
+            case "A+":
+                return 4.0;
+            case "A":
+                return 4.0;
+            case "A-":
+                return 3.7;
+            case "B+":
+                return 3.3;
+            case "B":
+                return 3.0;
+            case "B-":
+                return 2.7;
+            case "C+":
+                return 2.3;
+            case "C":
+                return 2.0;
+            case "C-":
+                return 1.7;
+            case "D":
+                return 1.0;
+            default:
+                return 0.0;  // F or any other grade
+        }
+    }
+
+    // Method to calculate GPA
+    public double calculateGPA() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_GRADES, new String[]{COLUMN_GRADE, COLUMN_CREDITS}, null, null, null, null, null);
+        double totalGPA = 0.0;
+        int totalCredits = 0;
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String grade = cursor.getString(cursor.getColumnIndex(COLUMN_GRADE));
+            @SuppressLint("Range") int credits = cursor.getInt(cursor.getColumnIndex(COLUMN_CREDITS));
+            totalGPA += convertGradeToGPA(grade) * credits;
+            totalCredits += credits;
+        }
+        cursor.close();
+        return totalCredits > 0 ? totalGPA / totalCredits : 0.0;
     }
 }
