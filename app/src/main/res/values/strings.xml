@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GPA Calculator</string>
+    <string name="title_activity_view_grades">View Grades</string>
 </resources>

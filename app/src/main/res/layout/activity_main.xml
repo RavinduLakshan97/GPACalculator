@@ -67,6 +67,22 @@
             android:layout_marginLeft="50dp"
             android:text="Reset"
             android:textColor="#FFFFFF" />
+        <Button
+            android:id="@+id/viewButton"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="50dp"
+            android:text="View Grades"
+            android:background="#FFEB3B"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:id="@+id/gradesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/gpaTextView"
