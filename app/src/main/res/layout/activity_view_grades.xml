@@ -7,10 +7,19 @@
     android:orientation="vertical"
     tools:context=".ViewGradesActivity">
 
+    <TableLayout
+        android:id="@+id/gradesTable"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:stretchColumns="*">
+    </TableLayout>
+
     <TextView
-        android:id="@+id/gradesTextView"
+        android:id="@+id/totalGpaTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textSize="18sp" />
+        android:gravity="center"
+        android:text="Total GPA: 0.0"
+        android:textSize="18sp"/>
 </LinearLayout>
