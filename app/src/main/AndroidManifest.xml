@@ -12,7 +12,7 @@
         android:theme="@style/Theme.GPACalculator"
         tools:targetApi="31">
 
-        <!-- Main activity declaration -->
+
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <!-- ViewGradesActivity declaration -->
+        <!-- ViewGradesActivity-->
         <activity
             android:name=".ViewGradesActivity"
             android:label="@string/title_activity_view_grades"
