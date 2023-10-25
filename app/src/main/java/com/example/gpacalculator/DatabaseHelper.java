@@ -8,25 +8,25 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    // Table name
+
     public static final String TABLE_GRADES = "grades";
 
-    // Database Version
-    private static final int DATABASE_VERSION = 2;  // Updated database version
 
-    // Database Name
+    private static final int DATABASE_VERSION = 2;
+
+
     private static final String DATABASE_NAME = "gpa_calculator.db";
 
-    // Column names
+
     private static final String COLUMN_ID = "id";
     static final String COLUMN_SUBJECT = "subject";
     static final String COLUMN_GRADE = "grade";
-    static final String COLUMN_CREDITS = "credits";  // Added credits column
+    static final String COLUMN_CREDITS = "credits";
 
-    // Table create statement
+
     private static final String CREATE_TABLE_GRADES = "CREATE TABLE "
             + TABLE_GRADES + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + COLUMN_SUBJECT + " TEXT," + COLUMN_GRADE + " TEXT," + COLUMN_CREDITS + " INTEGER" + ")";  // Added credits column
+            + COLUMN_SUBJECT + " TEXT," + COLUMN_GRADE + " TEXT," + COLUMN_CREDITS + " INTEGER" + ")";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,20 +34,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // creating required tables
         db.execSQL(CREATE_TABLE_GRADES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_GRADES);
-
-        // create new tables
         onCreate(db);
     }
 
-    // Method to convert letter grade to GPA value
+
     public double convertGradeToGPA(String grade) {
         switch (grade) {
             case "A+":
@@ -71,11 +67,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             case "D":
                 return 1.0;
             default:
-                return 0.0;  // F or any other grade
+                return 0.0;
         }
     }
 
-    // Method to calculate GPA
+
     public double calculateGPA() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_GRADES, new String[]{COLUMN_GRADE, COLUMN_CREDITS}, null, null, null, null, null);
