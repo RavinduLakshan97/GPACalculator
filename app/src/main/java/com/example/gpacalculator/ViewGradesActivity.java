@@ -3,6 +3,7 @@ package com.example.gpacalculator;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -17,6 +18,7 @@ public class ViewGradesActivity extends AppCompatActivity {
     private GPACalculator gpaCalculator;
     private Spinner gradeSpinner;
     private Button totalGpaButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class ViewGradesActivity extends AppCompatActivity {
         TableLayout gradesTable = findViewById(R.id.gradesTable);
         totalGpaButton = findViewById(R.id.totalGpaButton);
         gradeSpinner = findViewById(R.id.gradeSpinner);
+        backButton = findViewById(R.id.backButton);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.grade_array, android.R.layout.simple_spinner_item);
@@ -65,6 +68,13 @@ public class ViewGradesActivity extends AppCompatActivity {
 
         double gpa = totalCredits > 0 ? totalGpa / totalCredits : 0.0;
         totalGpaButton.setText("Total GPA: " + String.format("%.2f", gpa));
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private TextView createTextView(String text) {
