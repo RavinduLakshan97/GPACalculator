@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,14 +11,24 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:stretchColumns="*">
-    </TableLayout>
+        android:backgroundTintMode="add"
+        android:stretchColumns="*"></TableLayout>
 
-    <TextView
-        android:id="@+id/totalGpaTextView"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/totalGpaButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginLeft="120dp"
+        android:background="@color/material_dynamic_neutral50"
+        android:enabled="false"
         android:text="Total GPA: 0.0"
-        android:textSize="18sp"/>
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:iconTint="#FFEB3B" />
+
+    <Spinner
+        android:id="@+id/gradeSpinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
 </LinearLayout>

@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">GPA Calculator</string>
     <string name="title_activity_view_grades">View Grades</string>
+    <string-array name="grade_array">
+        <item>Select Grade</item>
+        <item>A+</item>
+        <item>A</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>B-</item>
+        <item>C+</item>
+        <item>C</item>
+        <item>C-</item>
+        <item>D+</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
 </resources>

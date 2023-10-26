@@ -23,19 +23,16 @@
         android:paddingBottom="80dp"
         android:paddingTop="20dp" >
 
-
         <EditText
             android:id="@+id/subjectEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Subject" />
 
-        <EditText
-            android:id="@+id/gradeEditText"
+        <Spinner
+            android:id="@+id/gradeSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Grade"
-            android:inputType="text" />
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/creditsEditText"
@@ -67,6 +64,7 @@
             android:layout_marginLeft="50dp"
             android:text="Reset"
             android:textColor="#FFFFFF" />
+
         <Button
             android:id="@+id/viewButton"
             android:layout_width="300dp"
