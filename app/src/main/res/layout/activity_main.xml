@@ -71,7 +71,6 @@
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
             android:text="View Grades"
-            android:background="#FFEB3B"
             android:textColor="#ffffff" />
 
         <TextView

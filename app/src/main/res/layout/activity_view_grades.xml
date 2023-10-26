@@ -26,6 +26,14 @@
         android:textColor="@color/white"
         app:iconTint="#FFEB3B" />
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:onClick="onBackButtonClick" />
+
+
     <Spinner
         android:id="@+id/gradeSpinner"
         android:layout_width="0dp"
