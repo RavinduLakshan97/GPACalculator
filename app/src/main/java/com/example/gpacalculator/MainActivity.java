@@ -3,8 +3,10 @@ package com.example.gpacalculator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GPACalculator gpaCalculator;
     private EditText subjectEditText;
-    private EditText gradeEditText;
+    private Spinner gradeSpinner;
     private EditText creditsEditText;
 
     @Override
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         gpaCalculator = new GPACalculator(this);
 
         subjectEditText = findViewById(R.id.subjectEditText);
-        gradeEditText = findViewById(R.id.gradeEditText);
+        gradeSpinner = findViewById(R.id.gradeSpinner);
         creditsEditText = findViewById(R.id.creditsEditText);
         final Button addButton = findViewById(R.id.addButton);
         final Button calculateButton = findViewById(R.id.calculateButton);
@@ -31,16 +33,21 @@ public class MainActivity extends AppCompatActivity {
         final Button viewButton = findViewById(R.id.viewButton);
         final TextView gpaTextView = findViewById(R.id.gpaTextView);
 
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.grade_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gradeSpinner.setAdapter(adapter);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String subject = subjectEditText.getText().toString();
-                String grade = gradeEditText.getText().toString().toUpperCase();
+                String grade = gradeSpinner.getSelectedItem().toString();
                 String credits = creditsEditText.getText().toString();
                 if (!subject.isEmpty() && !grade.isEmpty() && !credits.isEmpty()) {
                     gpaCalculator.insertGrade(subject, grade, Integer.parseInt(credits));
                     subjectEditText.setText("");
-                    gradeEditText.setText("");
+                    gradeSpinner.setSelection(0);
                     creditsEditText.setText("");
                 }
             }

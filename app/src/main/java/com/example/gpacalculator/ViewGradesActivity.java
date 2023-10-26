@@ -2,6 +2,9 @@ package com.example.gpacalculator;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -11,6 +14,8 @@ import java.util.List;
 public class ViewGradesActivity extends AppCompatActivity {
 
     private GPACalculator gpaCalculator;
+    private Spinner gradeSpinner;
+    private Button totalGpaButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +25,20 @@ public class ViewGradesActivity extends AppCompatActivity {
         gpaCalculator = new GPACalculator(this);
 
         TableLayout gradesTable = findViewById(R.id.gradesTable);
-        TextView totalGpaTextView = findViewById(R.id.totalGpaTextView);
+        totalGpaButton = findViewById(R.id.totalGpaButton);
+        gradeSpinner = findViewById(R.id.gradeSpinner);
+
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.grade_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gradeSpinner.setAdapter(adapter);
 
         List<Grade> grades = gpaCalculator.getAllGrades();
         double totalGpa = 0.0;
         int totalCredits = 0;
 
-        // Add table headers
+
         TableRow headers = new TableRow(this);
         headers.addView(createTextView("Subject"));
         headers.addView(createTextView("Grade"));
@@ -34,7 +46,7 @@ public class ViewGradesActivity extends AppCompatActivity {
         headers.addView(createTextView("PV"));
         gradesTable.addView(headers);
 
-        // Add grades to table
+
         for (Grade grade : grades) {
             TableRow row = new TableRow(this);
             row.addView(createTextView(grade.getSubject()));
@@ -48,9 +60,9 @@ public class ViewGradesActivity extends AppCompatActivity {
             totalCredits += grade.getCredits();
         }
 
-        // Calculate and display total GPA
+
         double gpa = totalCredits > 0 ? totalGpa / totalCredits : 0.0;
-        totalGpaTextView.setText("Total GPA: " + String.format("%.2f", gpa));
+        totalGpaButton.setText("Total GPA: " + String.format("%.2f", gpa));
     }
 
     private TextView createTextView(String text) {
